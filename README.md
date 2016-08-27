@@ -1,6 +1,6 @@
 # DnEye
 
-DnEye is a portal for for movie, TV and celebrity content. Its peculiarity is that It does not require human intervention to populate its database: if a user searches for an item that does not exist in the system, dneye automatically query services like imdb,rotten tomatoes and themoviedb and will automatically update the system.
+DnEye is a portal content for movie, TV and celebrity content. Its peculiarity is that It does not require human intervention to populate its database: if a user searches for an item that does not exist in the system, dneye automatically query services like imdb,rotten tomatoes and themoviedb and will automatically update the system.
 
 This project was born as an experiment to understand the logic of the Symfony framework 3.1.3. I will keep This repository updated for I experimenting  new bundles or for  making the site and the user experience the best it can be
 
