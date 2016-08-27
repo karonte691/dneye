@@ -1,0 +1,4 @@
+AppBundle\Document\Item:
+  properties:
+          title:
+              - NotBlank: ~

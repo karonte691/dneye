@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        {{ form_start(search_form) }}
+        <div class="form-group center-block">
+            <div class="input-group">
+                {{ form_row(search_form.title,  {'attr': {'class': 'search-query form-control'}}) }}
+                <span class="input-group-btn">
+                                    <button class="btn btn-danger" type="button">
+                                        <span class=" glyphicon glyphicon-search"></span>
+                                    </button>
+                 </span>
+            </div>
+        </div>
+        {{ form_end(search_form) }}
+    </div>
+</div>

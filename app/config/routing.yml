@@ -1,0 +1,45 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+homepage:
+    path:      /
+    defaults: { _controller: AppBundle:Default:index}
+
+search:
+    path:      /search
+    defaults:  { _controller: AppBundle:Search:search }
+
+about:
+    path:     /about
+    defaults: { _controller: AppBundle:Common:about}
+
+contact:
+    path:     /contact
+    defaults: { _controller: AppBundle:Common:contact}
+
+item:
+    path:     /item/{imdbid}/{title}
+    defaults: { _controller: AppBundle:Item:item}
+    requirements:
+      _format:  html|rss
+
+episode:
+    path:     /item/{title}/season/{seasonNbr}/{imdbid}/{episode_title}
+    defaults: { _controller: AppBundle:Item:episode, _format: html}
+
+##fos_user routing configuration##
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+imdbimage:
+    path: /imdbimage
+    defaults: { _controller: AppBundle:Item:getImdbImage}
+    requirements:
+        methods: GET
+
+fos_comment_api:
+    type: rest
+    resource: "@FOSCommentBundle/Resources/config/routing.yml"
+    prefix: /api
+    defaults: { _format: html }

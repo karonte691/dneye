@@ -1,0 +1,24 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/panel.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+<div class="row vertical-offset-100">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">wow, it worked!</h3>
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-success">
+                    <p style="text-align: center; font-weight: bold">{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+                </div>
+            </div>
+         </div>
+    </div>
+</div>
+{% endblock fos_user_content %}

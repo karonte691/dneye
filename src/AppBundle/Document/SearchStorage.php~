@@ -1,0 +1,26 @@
+<?php
+
+namespace AppBundle\Document;
+
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+
+/**
+ * @MongoDB\Document(repositoryClass="AppBundle\Repository\SearchRepository")
+ */
+class SearchStorage
+{
+    /**
+     * @MongoDB\Id
+     */
+    protected $id;
+
+    /**
+     * @MongoDB\Field(type="string")
+     */
+    protected $keySearched;
+
+    /**
+     * @MongoDB\Field(type="Date")
+     */
+    protected $createdAt;
+}

@@ -1,0 +1,12 @@
+parameters:
+      ##imdb api
+      imdbUrl: "http://www.omdbapi.com/?t=%%s&y=&plot=full&r=json"
+      imdbSeasonUrl: "http://www.omdbapi.com/?i=%%s&Season=%%d"
+      imdbEpisodeUrl: "http://www.omdbapi.com/?i=%%s&plot=full&r=json"
+
+services:
+  background_worker:
+      class: AppBundle\Services\ItemProcessor
+      arguments: ["@doctrine.odm.mongodb.document_manager", "%imdbUrl%", "%imdbSeasonUrl%","%imdbEpisodeUrl%"]
+  search:
+      class: AppBundle\Services\SearchForm

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ episode.season.item.title }} - season {{ episode.season.season }} - episode {{ episode.episode }}: {{ episode.title }}
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/list.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-4 col-md-4">
+        <img src="{{ url('imdbimage', {'url': episode.poster}) }}"
+             alt="" class="img-rounded img-responsive" />
+    </div>
+    <div class="col-sm-8 col-md-8">
+        <blockquote>
+            <p>{{ episode.title}}</p>
+            <cite title="Source Title">
+                {{ episode.plot }}
+            </cite>
+        </blockquote>
+        <ol class="rounded-list">
+            <li><a href="{{ path('item', {'imdbid': episode.season.item.imdbId, 'title': episode.season.item.title}) }}">Series: {{ episode.season.item.title }}</a></li>
+            <li><a href="#">Season: {{ episode.season.season }}</a></li>
+            <li><a href="#">Year: {{ episode.year }}</a></li>
+            <li><a href="#">Released: {{ episode.released }}</a></li>
+            <li><a href="#">Genre: {{ episode.genre }}</a></li>
+            <li><a href="#">Director: {{ episode.director }}</a></li>
+            <li><a href="#">Writer: {{ episode.writers }}</a></li>
+            <li><a href="#">Actors: {{ episode.actors }}</a></li>
+            <li><a href="#">Language: {{ episode.language }}</a></li>
+            <li><a href="#">Country: {{ episode.country }}</a></li>
+            <li><a href="#">imdb Rating: {{ episode.imdbRating }}</a></li>
+        </ol>
+    </div>
+</div>
+{% endblock %}

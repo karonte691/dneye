@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ item.title }}
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/list.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/panel.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/episodeList.css') }}" rel="stylesheet" />
+    <!--comment-->
+    {% stylesheets '@FOSCommentBundle/Resources/public/css/comments.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {% endstylesheets %}
+
+    <style>
+        textarea
+        {
+            width: 100%;
+        }
+
+        h3
+        {
+            color: #99742e;
+            font-family: Georgia,"Times New Roman",Times,serif;
+            font-size: 26px;
+        }
+
+        .fos_comment_submit input {
+            font-size: 1.2em;
+            margin-top: 3px;
+            padding: 3px 12px;
+            background: #594c2d none repeat scroll 0 0;
+            border-color: #594c2d;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+            color: #ffeeb4;
+        }
+    </style>
+{% endblock %}
+
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-4 col-md-4">
+            <img src="{{ url('imdbimage', {'url': item.poster}) }}"
+                 alt="" class="img-rounded img-responsive" />
+        </div>
+        <div class="col-sm-8 col-md-8">
+            <blockquote>
+                <p>{{ item.title}}</p>
+                <cite title="Source Title">
+                    {{ item.plot }}
+                </cite>
+            </blockquote>
+                <ol class="rounded-list">
+                    <li><a href=""> Year: {{ item.year }}</a></li>
+                    <li><a href="#">Released: {{ item.released }}</a></li>
+                    <li><a href="#">Genre: {{ item.genre }}</a></li>
+                    <li><a href="#">Director: {{ item.director }}</a></li>
+                    <li><a href="#">Writer: {{ item.writers }}</a></li>
+                    <li><a href="#">Actors: {{ item.actors }}</a></li>
+                    <li><a href="#">Language: {{ item.language }}</a></li>
+                    <li><a href="#">Country: {{ item.country }}</a></li>
+                    <li><a href="#">imdb Rating: {{ item.imdbRating }}</a></li>
+                </ol>
+        </div>
+    </div>
+    {% if  item.type == 'series' and item.season|length > 0 %}
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <div id="seasonsSection">
+                    {% for season in item.season %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Season {{ season.season }}</h3>
+                            </div>
+                            <div class="panel-body">
+                            {% for episode in season.episode %}
+                                <div class="well well-sm">
+                                    <div class="row">
+                                        <div class="col-xs-3 col-md-3 text-center">
+                                            <img src="{{ url('imdbimage', {'url': item.poster}) }}" alt=""
+                                                 class="img-rounded img-responsive" />
+                                        </div>
+                                        <div class="col-xs-9 col-md-9 section-box">
+                                            <h2>
+                                                <a href="{{ path('episode', {'title': item.title,
+                                                                             'seasonNbr': season.season,
+                                                                             'imdbid': episode.imdbId,
+                                                                             'episode_title': episode.title
+                                                                             })
+                                                          }}"
+                                                   target="_blank">
+                                                    {{ episode.title }}
+                                                </a>
+                                            </h2>
+                                            <p>
+                                                {{ episode.plot }}
+                                            </p>
+                                            <hr />
+                                            <div class="row rating-desc">
+                                                <div class="col-md-12">
+                                                    {{ episode.released }}
+                                                    <span class="separator">|</span>
+                                                    {{ episode.rating }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            {% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': item.imdbId} %}
+        </div>
+    </div>
+{% endblock %}

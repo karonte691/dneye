@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Search {{ search_term }}
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/search.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+    <hgroup class="mb20">
+        <h1>Search Results</h1>
+        <h2 class="lead"><strong class="text-danger">{{ search_results|length }}</strong> results were found for the search for <strong class="text-danger">{{ search_term }}</strong></h2>
+    </hgroup>
+    {% for item in search_results %}
+    <div class="search-result row">
+        <div class="col-xs-12 col-sm-12 col-md-3">
+            <a href=""  class="thumbnail"><img src="{{ url('imdbimage', {'url': item.poster}) }}" alt="" /></a>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-2">
+            <ul class="meta-search">
+                <li><i class="glyphicon glyphicon-calendar"></i> <span>{{ item.released }}</span></li>
+                <li><i class="glyphicon glyphicon-time"></i> <span>{{ item.imdbrating }}</span></li>
+                <li><i class="glyphicon glyphicon-tags"></i> <span>{{ item.genre }}</span></li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+            <h3><a href="{{ path('item', {'imdbid': item.imdbId, 'title': item.title}) }}" title="">{{ item.title}}</a></h3>
+            <p>{{ item.plot }}</p>
+        </div>
+        <span class="clearfix borda"></span>
+    </div>
+    {% endfor %}
+{% endblock %}
